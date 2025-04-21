@@ -29,20 +29,30 @@ export function HeroSection({ className }: HeroSectionProps) {
             Professional property solutions tailored to your investment goals and business needs.
           </p>
           <div className="flex flex-wrap gap-4 pt-4">
+            {/* 
+              TODO: To set your Calendly scheduling link, update the href below (and also in CalendlySection.tsx).
+            */}
             <Button 
               size="lg" 
               className="bg-white text-primary hover:bg-white/90"
               asChild
             >
-              <a href="#schedule">Schedule Consultation</a>
+              <a href="#schedule">
+                Schedule Consultation
+              </a>
             </Button>
+            {/* 
+              Changed: This now visually matches the "Schedule Consultation" button
+              and uses the same main style as requested.
+            */}
             <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-white text-white hover:bg-white/10"
+              size="lg"
+              className="bg-white text-primary hover:bg-white/90"
               asChild
             >
-              <a href="#properties">View Properties</a>
+              <a href="#properties">
+                View Properties
+              </a>
             </Button>
           </div>
         </div>

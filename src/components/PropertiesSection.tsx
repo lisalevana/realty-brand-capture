@@ -1,6 +1,7 @@
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { useState } from "react";
 
 interface PropertiesSectionProps {
   className?: string;
@@ -8,7 +9,8 @@ interface PropertiesSectionProps {
 
 export function PropertiesSection({ className }: PropertiesSectionProps) {
   // Sample properties data
-  const properties = [
+  // TODO: Edit the property data below to fit your needs.
+  const allProperties = [
     {
       id: 1,
       title: "Downtown Office Tower",
@@ -32,8 +34,37 @@ export function PropertiesSection({ className }: PropertiesSectionProps) {
       size: "50,000 sq ft",
       location: "Midtown, IL",
       image: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=800"
+    },
+    // ----- EXAMPLE: These properties appear when "View All Properties" is clicked -----
+    {
+      id: 4,
+      title: "Uptown Medical Plaza",
+      type: "Medical",
+      size: "18,000 sq ft",
+      location: "Northside, TX",
+      image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=800"
+    },
+    {
+      id: 5,
+      title: "Harbor Logistics Park",
+      type: "Industrial",
+      size: "60,000 sq ft",
+      location: "Harbor City, FL",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=800"
+    },
+    {
+      id: 6,
+      title: "Central Business Center",
+      type: "Office",
+      size: "40,000 sq ft",
+      location: "Downtown, GA",
+      image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=800"
     }
   ];
+
+  // Show one row (3 properties) by default, expand to 2 rows (6) on click
+  const [showAll, setShowAll] = useState(false);
+  const properties = showAll ? allProperties : allProperties.slice(0, 3);
 
   return (
     <section id="properties" className={cn("py-16 md:py-24", className)}>
@@ -45,6 +76,7 @@ export function PropertiesSection({ className }: PropertiesSectionProps) {
           </p>
         </div>
 
+        {/* TODO: Edit property grid and details below. */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
           {properties.map((property) => (
             <div key={property.id} className="bg-background rounded-lg overflow-hidden border border-border/50 shadow-sm hover:shadow-md transition-shadow">
@@ -66,6 +98,9 @@ export function PropertiesSection({ className }: PropertiesSectionProps) {
                   <p>Size: {property.size}</p>
                   <p>Location: {property.location}</p>
                 </div>
+                {/* 
+                  TODO: Replace below "View Details" button's onClick or link to your own property detail page if desired.
+                */}
                 <Button variant="outline" className="w-full">View Details</Button>
               </div>
             </div>
@@ -73,9 +108,19 @@ export function PropertiesSection({ className }: PropertiesSectionProps) {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
-            View All Properties
-          </Button>
+          {!showAll ? (
+            <Button 
+              variant="outline"
+              size="lg"
+              className="mx-auto"
+              onClick={() => setShowAll(true)}
+            >
+              View All Properties
+            </Button>
+          ) : (
+            // Optionally, provide a way to collapse or change this text
+            <span className="text-muted-foreground text-sm">You are viewing all featured properties.</span>
+          )}
         </div>
       </div>
     </section>
